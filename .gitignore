@@ -1,0 +1,11 @@
+/Temp
+/obj
+/library
+/Builds
+*.csproj
+*.unityproj
+*.sln
+*.suo
+assetArchive
+/Assets/UnityVS*
+/Assets/UnityTestTools*
