@@ -37,6 +37,7 @@ public class s_player : MonoBehaviour {
         alive = true;
         startTime = Time.realtimeSinceStartup;
         aud = GetComponent<AudioSource>();
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
 	}
 	
 	// Update is called once per frame
@@ -49,8 +50,8 @@ public class s_player : MonoBehaviour {
     {
         if (alive)
         {
-            float m_horizontal = Input.GetAxis("Horizontal");
-            float m_vertical = Input.GetAxis("Vertical");
+            float m_horizontal = Input.GetAxis("Horizontal") + Input.acceleration.x;
+            float m_vertical = Input.GetAxis("Vertical") + Input.acceleration.y;
 
             Vector3 movement = new Vector3(m_horizontal, 0, m_vertical);
             if (rb.velocity.magnitude < maxSpeed)
@@ -59,11 +60,12 @@ public class s_player : MonoBehaviour {
             }
 
             timeLeft = timeLeft - Time.deltaTime ;
+
         stealTime();
         updateCountTest();
         }
 
-        if (timeLeft < 0)
+        if (timeLeft < 0.02)
         {
             Color col = loseText.color;
             col.a = 1f;
